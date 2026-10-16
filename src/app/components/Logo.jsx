@@ -1,5 +1,11 @@
+import Link from "next/link";
+
 const Logo = () => {
-  return <h1>FamilyFriends</h1>;
+  return (
+    <Link href="/">
+      <h1 className="text-xl font-extrabold">FamilyFriends</h1>
+    </Link>
+  );
 };
 
 export default Logo;
