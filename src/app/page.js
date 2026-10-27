@@ -21,8 +21,9 @@ const getBreeds = async (search) => {
     },
   });
   const breeds = await response.json();
+  const searchInput = search || "";
 
-  const filteredBreeds = breeds.filter((breed) => breed.name.toLowerCase().includes(search.toLowerCase()));
+  const filteredBreeds = breeds.filter((breed) => breed.name.toLowerCase().includes(searchInput.toLowerCase()));
 
   return filteredBreeds.map((breed) => (
     <BreedCard key={breed.id} id={breed.id} image={breed.image.url} breedName={breed.name} country={breed.origin} />
