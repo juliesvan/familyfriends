@@ -1,1 +1,25 @@
 "use server";
+
+export const addFavorite = async (imageID) => {
+  const response = await fetch("https://api.thedogapi.com/v1/favourites", {
+    method: "POST",
+    headers: {
+      "x-api-key": process.env.API_KEY,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      image_id: imageID,
+    }),
+  });
+  const favorite = await response.json();
+  return favorite;
+};
+
+export const removeFavorite = async (favoriteId) => {
+  const response = await fetch(`https://api.thedogapi.com/v1/favourites/${favoriteId}`, {
+    method: "DELETE",
+    headers: {
+      "x-api-key": process.env.API_KEY,
+    },
+  });
+};

@@ -5,10 +5,13 @@ import BreedDesc from "@/app/components/BreedDesc";
 const DetailView = async ({ params }) => {
   const { id } = await params;
   const breed = await getID(id);
-  console.log(breed);
+  const favorites = await getFavorites();
+  const isFavorite = favorites.some((favorite) => favorite.image_id === breed.image.id);
+  const favorite = favorites.find((favorite) => favorite.image_id === breed.image.id);
+
   return (
     <>
-      <BreedFavorite image={breed.image.url} breedName={breed.name} />
+      <BreedFavorite image={breed.image.url} breedName={breed.name} imageID={breed.image.id} isFavorite={isFavorite} favoriteId={favorite?.id} />
 
       <Traits breedName={breed.name} breedTrait={breed.temperament} />
 
@@ -28,4 +31,15 @@ const getID = async (id) => {
   const breedID = await response.json();
 
   return breedID;
+};
+
+const getFavorites = async () => {
+  const response = await fetch("https://api.thedogapi.com/v1/favourites", {
+    headers: {
+      "x-api-key": process.env.API_KEY,
+    },
+  });
+  const favorites = await response.json();
+
+  return favorites;
 };

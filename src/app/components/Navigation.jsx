@@ -16,7 +16,7 @@ const Navigation = () => {
       </Link>
 
       <Link href="/detailview">
-        <FaRegStar className={`w-6 h-6 ${pathname === "/detailview" ? "text-[#F2968F]" : "text-[#ACACAC]"}`} />
+        <FaRegStar className={`w-6 h-6 ${pathname.startsWith("/detailview") ? "text-[#F2968F]" : "text-[#ACACAC]"}`} />
       </Link>
 
       <Link href="#">
